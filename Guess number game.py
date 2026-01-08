@@ -14,27 +14,25 @@ def Distance_Suggestion(UserAns,RanNum):
     else:
         print("Very very far")
 
-def Mode_1():
-    print("Hello,this is Guess number game, mode 1")
+
+
+def Game():
+    print("Hello,this is Guess number game.")
+    
     count = 0
-    start_time = time.time()
+    RanNum = 0
+    time_limit = 0
+    
     hint_det = 0
     hint_set = 1
+    
+    mode_det = Mode_choice()
+    choice_process(mode_det)
 
     # we need to set the difficulty here
 
-    dif = dificult_setting()
-    if dif == 1:
-        time_limit = 50
-        RanNum = random.randint(1,100)
-    elif dif == 2:
-        time_limit = 40
-        RanNum = random.randint(1,150)
-    elif dif == 3:
-        time_limit = 35
-        RanNum = random.randint(1,200)
-
-
+  
+    start_time = time.time()
     
     while True:
         
@@ -48,6 +46,7 @@ def Mode_1():
         rest_time = int(time_limit - past_time)
         if past_time > time_limit:
             print("Time is up !")
+            print(f"the answer is {RanNum}")
             break
         else:
             print(f"You have {rest_time} seconds left")
@@ -62,39 +61,6 @@ def Mode_1():
             Distance_Suggestion(UserAns,RanNum)
         
             
-
-def Mode_2():
-    print("Hello,this is Guess number game, mode 2")
-    print("Please let other player to input a number")
-    count = 0
-    RanNum = int(input())
-    start_time = time.time()
-    time_limit = 20
-    hint_det = 0
-    hint_set = 1
-    while True:
-        hint_det = random.randint(0,5)
-        if hint_det == hint_set:
-            hint(RanNum)
-        past_time = time.time() - start_time
-        rest_time = int(time_limit - past_time)
-        if past_time > time_limit:
-            print("Time is up !")
-            break
-        else:
-            print(f"You have {rest_time} seconds left")
-        print("Please input your number")
-        UserAns = int(input())
-        count += 1
-        if UserAns == RanNum:
-            print("You are right!")
-            print(f"Your count is {count}")
-            break    
-        else:
-            Distance_Suggestion(UserAns,RanNum)
-    
-
-
 
 
 def hint(num):
@@ -142,11 +108,67 @@ def dificult_setting():
         #(solved)why we need to choose again even if we input the valid 2 ?
     return det
 
-#the end , why we have the sudden error when time is up?
-Mode_1()
+        #（solved)the end , why we have the sudden error when time is up?
 
-            
+def Mode_choice():
+    print("Please choose a mode")
+    print("")
+    print("Mode 1: the number is generate by the computer")
+    print("Mode 2: the number is type by the other player")
+    print("")
+    while True:
+        try:
+            mode_choice = int(input())
+            return mode_choice
+        except:
+            print("Error, please input a valid number")
 
+
+def choice_process(mode_det):
+    nonlocal time_limit,RanNum
+
+    if mode_det == 1:
+        dif = dificult_setting()
+        if dif == 1:
+            time_limit = 50
+            RanNum = random.randint(1,100)
+        elif dif == 2:
+            time_limit = 40
+            RanNum = random.randint(1,150)
+        elif dif == 3:
+            time_limit = 35
+            RanNum = random.randint(1,200)
+    
+    elif mode_det == 2:
+        dif = dificult_setting()
+        if dif == 1:
+            time_limit = 50
+            while True:
+                RanNum = int(input("Please input the number in the suitable range"))
+                if 0 <= RanNum and RanNum <= 100:
+                    break
+                else:
+                    print("Invalid! Please input again")
+        elif dif == 2:
+            time_limit = 40
+            while True:
+                RanNum = int(input("Please input the number in the suitable range"))
+                if 0 <= RanNum and RanNum <= 150:
+                    break
+                else:
+                    print("Invalid! Please input again")
+        elif dif == 3:
+            time_limit = 35
+            while True:
+                RanNum = int(input("Please input the number in the suitable range"))
+                if 0 <= RanNum and RanNum <= 200:
+                    break
+                else:
+                    print("Invalid! Please input again")
+    else:
+        return 1
     
 
+Game()
+            
 
