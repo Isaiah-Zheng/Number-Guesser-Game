@@ -1,14 +1,162 @@
 import random
 import time
 
+
+
+
+def main():
+    state = {
+        'count' : 0,
+        'RanNum' : 0,
+        'time_limit' : 0,
+        'max_guessing' : 0,
+        'mode' : 0,
+        'difficulty' : 0
+    }
+
+    while True :
+        hello()
+        
+        state["mode"] = select_mode()
+        mode = state["mode"]
+        
+        state['difficulty'] = select_difficluty()
+        dif = state['difficulty']
+
+        state["time_limit"],state["RanNum"],state["max_guessing"] = get_number_state(mode,dif)
+        time_limit = state["time_limit"]
+        RanNum = state["RanNum"]
+        max_guessing = state["max_guessing"]
+
+        
+
+
+def hello():
+    print("Hello , this is number guessing game !")
+    print()
+
+def select_mode():
+    print("")
+    print("Mode 1: the number is generate by the computer")
+    print("Mode 2: the number is type by the other player")
+    print("")
+    while True:
+        try:
+            mode_choice = int(input("Please choose a mode"))
+            if mode_choice == 1 or mode_choice ==2:
+                return mode_choice
+            else:
+                print("Error, please input a valid number")
+                        
+        except:
+            print("Error, please input a valid number")
+
+def select_difficluty():
+    while True:
+
+        print("")
+        print("1.Easy: 50s, range(0,100),max guessing:8")
+        print("2.Advanced: 40s, range(0,150),max guessing:10")
+        print("3.Difficult: 35s range(0,200),max guessing:12")
+        print("")
+        try:
+            dif = int(input("Please input the difficulty you want > "))
+            if dif == 1 or dif == 2 or dif == 3:
+                return dif 
+            else:
+                print(f"{dif} is not included")
+        except:
+            print("Error, input a number please")
+
+def get_number_state(mode,det):
+    if mode == 1:    
+        if det == 1:
+            time_limit = 50
+            RanNum = random.randint(0,100)
+            max_guessing = 8
+
+            return time_limit,RanNum,max_guessing
+                
+        elif det == 2:
+            time_limit = 40
+            RanNum = random.randint(0,150)
+            max_guessing = 10
+            return time_limit,RanNum,max_guessing
+        elif det == 3:
+            time_limit = 35
+            RanNum = random.randint(0,200)
+            max_guessing = 12
+
+            return time_limit,RanNum,max_guessing
+        
+    else:
+        if det == 1:
+            time_limit = 50
+            while True:
+                RanNum = int(input("Please input the number in the suitable range"))
+                if 0 <= RanNum and RanNum <= 100:
+                    break
+                else:
+                    print("Invalid! Please input again")
+            max_guessing = 8
+
+            return time_limit,RanNum,max_guessing
+                
+        elif det == 2:
+            time_limit = 40
+            while True:
+                RanNum = int(input("Please input the number in the suitable range"))
+                if 0 <= RanNum and RanNum <= 150:
+                    break
+                else:
+                    print("Invalid! Please input again")
+            max_guessing = 10
+            return time_limit,RanNum,max_guessing
+        elif det == 3:
+            time_limit = 35
+            while True:
+                RanNum = int(input("Please input the number in the suitable range"))
+                if 0 <= RanNum and RanNum <= 200:
+                    break
+                else:
+                    print("Invalid! Please input again")
+            max_guessing = 12
+
+            return time_limit,RanNum,max_guessing
+        else:
+            print(f"{det} is not included")
+
+
+
+
+def game():
+
+def show_hint():
+    
+def check_number():
+    
+
+
+
+
+
+
+
+
 def Game():
+    
+    
+    
+    
+    
+    
+    
+    
     while True:    
         print("Hello,this is Guess number game.")
         
-        count = 0
-        RanNum = 0
-        time_limit = 0
-        max_guessing = 0
+        
+        
         
         #hint_det = 0
         #hint_set = 1
